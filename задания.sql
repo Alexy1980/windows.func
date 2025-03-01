@@ -319,4 +319,4 @@ rows between unbounded preceding and current row
 )
 order by department , salary , id;
 
--- Фреймы
+-- Фреймы main
