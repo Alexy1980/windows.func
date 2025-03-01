@@ -283,3 +283,25 @@ sum(salary) over () as fund
 from employees
 order by department, salary, id;
 
+-- рассчитать кумулятивные показатели
+-- t_income показывает доходы нарастающим итогом, t_expense — расходы, а t_profit — прибыль
+/*
+- кумулятивный доход за январь = январь;
+- за февраль = январь + февраль;
+- за март = январь + февраль + март;
+- за апрель = январь + февраль + март + апрель;
+- и так далее.
+*/
+select
+year, month, income, expense,
+sum(income) over w as t_income,
+sum(expense) over w as t_expense,
+(sum(income) over w) - (sum(expense) over w) as t_profit
+from expenses
+window w as (
+order by year, month
+rows between unbounded preceding and current row
+)
+order by year, month;
+
+-- посчитать фонд оплаты труда нарастающим итогом независимо для каждого департамента
