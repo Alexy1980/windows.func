@@ -274,3 +274,12 @@ rows between 1 preceding and 1 following
 )
 order by year, month;
 
+-- определение окна может быть пустым Такое окно включает все строки, так что emp_count покажет общее количество сотрудников, а fund — общий фонд оплаты труда по всем записям employees
+
+select
+name, department, salary,
+count(*) over () as emp_count,
+sum(salary) over () as fund
+from employees
+order by department, salary, id;
+
