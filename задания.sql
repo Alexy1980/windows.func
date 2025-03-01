@@ -305,3 +305,18 @@ rows between unbounded preceding and current row
 order by year, month;
 
 -- посчитать фонд оплаты труда нарастающим итогом независимо для каждого департамента
+
+select
+id,
+name,
+department,
+salary,
+sum(salary) over w as total
+from employees
+window w as (
+partition by department
+rows between unbounded preceding and current row
+)
+order by department , salary , id;
+
+-- Фреймы
