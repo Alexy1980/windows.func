@@ -353,3 +353,31 @@ ROWS BETWEEN frame_start AND frame_end
 GROUPS BETWEEN frame_start AND frame_end
 RANGE BETWEEN frame_start AND frame_end
 */
+
+select
+name,
+department,
+count(*) over w as cnt
+from employees
+window w as (
+order by department
+rows between unbounded preceding and current row
+)
+order by department, id;
+
+select
+name,
+department,
+count(*) over w as cnt
+from employees
+window w as (
+order by department
+groups between unbounded preceding and current row
+)
+order by department, id;
+
+/*
+Разница в том, что rows-фрейм оперирует индивидуальными записями, а groups-
+фрейм — группами записей, у которых одинаковое значение столбца order by (в
+данном случае — одинаковый департамент):
+*/
