@@ -320,3 +320,26 @@ rows between unbounded preceding and current row
 order by department , salary , id;
 
 -- Фреймы main
+
+
+/*Есть таблица сотрудников employees . Напишите запрос, который для каждого
+сотрудника выведет:
+- размер з/п предыдущего по зарплате сотрудника (среди коллег по департаменту);
+- максимальную з/п по департаменту*/
+select
+id,
+name, 
+department, 
+salary,
+first_value(salary) over w as prev_salary,
+last_value(salary) over w as max_salary
+from employees
+
+window w as (
+order by department, id
+rows between 1 preceding and current row
+)
+order by department, salary, id;
+
+
+-- GROUPS-фреймы
