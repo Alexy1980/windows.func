@@ -343,3 +343,13 @@ order by department, salary, id;
 
 
 -- GROUPS-фреймы
+
+/*
+До сих пор мы пользовались таким определением фрейма:
+ROWS BETWEEN frame_start AND frame_end
+На самом деле, кроме фрейма по строкам (ROWS) бывают еще фреймы по
+группам (GROUPS) и диапазону (RANGE):
+ROWS BETWEEN frame_start AND frame_end
+GROUPS BETWEEN frame_start AND frame_end
+RANGE BETWEEN frame_start AND frame_end
+*/
